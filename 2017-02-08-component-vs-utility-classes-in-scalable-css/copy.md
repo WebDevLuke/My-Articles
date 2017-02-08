@@ -1,5 +1,5 @@
 # Component vs utility classes in scalable CSS
-### Posted on XX XXXX 2017
+### Posted on 8th February 2017
 
 Lately, I've been building the front-end for a large website which is likely going to stick around for a few years, so it was important that when it comes to CSS this thing is super scalable. The last thing I’d want is in a few years time the bulk of the stylesheet to be considered a CSS no-man’s land, with the only safe option being to add new styles to the bottom of the file to avoid any conflicts.
 
