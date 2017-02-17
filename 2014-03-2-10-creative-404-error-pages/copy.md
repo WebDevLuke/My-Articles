@@ -1,5 +1,5 @@
 # My top 5 memories from growing up with Web Design
-### Posted on 15th March 2014
+### Posted on 2nd March 2014
 
 ![Retro computer](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-03-2-10-creative-404-error-pages/10-creative-404-error-pages.jpg)
 
@@ -82,5 +82,3 @@ The Blizzard website is broken. Literally.
 ![Google.com](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-03-2-10-creative-404-error-pages/error_page_10.jpg)
 
 Subtle jokes. Simple presentation. Great all around.
-
-------
