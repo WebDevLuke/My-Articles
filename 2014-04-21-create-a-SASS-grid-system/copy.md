@@ -15,7 +15,7 @@ The first thing we need to do is define the SASS variables which will allow you 
 
 These should hopefully be pretty self explanatory.
 
-```
+```scss
 // Set Grid
 $columns: 12;
 $column-width: 70px;
@@ -33,7 +33,7 @@ $padding: $gutter / 2;
 
 We'll also add another variable which will govern if or not the container should be responsive.
 
-```
+```scss
 // Should it be responsive?
 $responsive: true;
 ```
@@ -44,16 +44,18 @@ Before we create the container itself, we first need to work out how wide it sho
 
 We do this by defining a new variable called $width as the sum of the width of all columns plus the width of all gutters.
 
-```
+```scss
 // Set container width relative to grid size
 $width: ($column-width * $columns) + ($gutter * ($columns - 1));
 ```
+
 ![SASS Grid System](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-04-21-create-a-SASS-grid-system/grid.jpg)
 Assuming the figures from step 1 remain unchanged, adding these together would return a figure of 1170.
 
 We can then use this to create the grid container. Notice the use of an IF statement and the responsive variable here to determine how we set the width.
 
-```
+
+```scss
 // Set Base Container
 .container
 {
@@ -75,7 +77,7 @@ padding: 0 $padding 0 $padding;
 
 This is where SASS really comes into it's own. Using a FOR statement we can procedurally generate the grid classes based on the $columns variable we've defined.
 
-```
+```scss
 // Define Individual Grid Classes
 @for $i from 1 to $columns
 {
@@ -130,7 +132,7 @@ So here we have the finished code and how it would compile into regular CSS. It'
 
 #### SASS
 
-```
+```scss
 // Set Grid (1170gs default)
 $column-width: 70px;
 $gutter: 30px;
@@ -203,7 +205,7 @@ clear: left;
 #### CSS
 `$responsive` set to `true`
 
-```
+```scss
 .container {
   max-width: 1170px;
   margin: 0px auto;
@@ -272,7 +274,7 @@ clear: left;
 #### CSS
 `$responsive` set to `false`
 
-```
+```scss
 .container {
   width: 1170px;
   margin: 0px auto;
@@ -339,7 +341,7 @@ clear: left;
  ```
 
 #### Example HTML
-```
+```html
 <div class="container">
 	<div class="clear grid4">Grid 4</div>
 	<div class="grid4">Grid 4</div>
