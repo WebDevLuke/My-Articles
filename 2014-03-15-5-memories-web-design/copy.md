@@ -1,5 +1,7 @@
-# My top 5 memories from growing up with Web Design
-### Posted on 15th March 2014
+<!-- 
+My top 5 memories from growing up with Web Design
+Posted on 15th March 2014
+ -->
 
 ![Retro computer](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-03-15-5-memories-web-design/5-memories-I-have-from-growing-up-web-designing.jpg)
 

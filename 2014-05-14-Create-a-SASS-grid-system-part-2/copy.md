@@ -1,5 +1,7 @@
-# Create a SASS Grid System Part 2
-### Posted on 14th May 2014
+<!--
+Create a SASS Grid System Part 2
+Posted on 14th May 2014
+-->
 
 ![SASS Grid System](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-05-14-Create-a-SASS-grid-system-part-2/blog-pic.jpg)
 

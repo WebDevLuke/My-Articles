@@ -1,5 +1,7 @@
-# Create a SASS grid system
-### Posted on 21st April 2014
+<!--
+Create a SASS grid system
+Posted on 21st April 2014
+-->
 
 ![SASS Grid System](https://raw.githubusercontent.com/WebDevLuke/My-Articles/master/2014-04-21-create-a-SASS-grid-system/blog-pic.jpg)
 
