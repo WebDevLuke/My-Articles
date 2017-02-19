@@ -1,8 +1,8 @@
 # Naming Conventions for Sizes in Scalable CSS
 
-In this article I’ll be exploring how naming conventions can be used to represent sizes in scalable CSS.
+In this article, I’ll be exploring how naming conventions can be used to represent sizes in scalable CSS.
 
-So what do I mean by this? One aspect of scalable CSS commonly involves creating patterns, components and utilities which are reusable across the codebase. Below is a very simple object pattern which boxes off content, similar to the island object as detailed by [Harry Roberts](https://csswizardry.com/2011/10/the-island-object/):
+So, what do I mean by this? One aspect of scalable CSS commonly involves creating patterns, components and utilities which are reusable across the codebase. Below is a very simple object pattern which boxes off content, similar to the island object, as detailed by [Harry Roberts](https://csswizardry.com/2011/10/the-island-object/):-
 
 ```css
 .o-box {
@@ -22,9 +22,9 @@ So what do I mean by this? One aspect of scalable CSS commonly involves creating
 }
 ```
 
-What makes this pattern especially reusable are the sizing modifiers which provide a range of spacing options to choose from.
+What makes this pattern especially reusable are the modifiers (The 'M' in [BEM](https://en.bem.info/)), which provide a range of spacing options to choose from.
 
-The class names here use a semantic naming convention which imply a clear incrementation from small to large, so it would be reasonable to assume that somebody reading the HTML would notice these classes and conclude that one box implementation has more spacing than another, without having to refer back to the CSS.
+These modifiers use a naming convention which represents a clear incrementation from small to large. This means that a developer reading the HTML would notice these classes, and therefore, that one box implementation has more spacing than another, without having to refer back to the stylesheet.
 
 ```css
 .o-box--spacing-small
@@ -32,17 +32,17 @@ The class names here use a semantic naming convention which imply a clear increm
 .o-box--spacing-large
 ```
 
-This small -> medium -> large pattern is a very basic example of a naming convention in CSS. It can be repeated to similar effect across a whole range of scenarios in your stylesheet.
+This small -> medium -> large pattern is a very basic example of a naming convention in CSS. It can be repeated to similar effect across a whole range of scenarios.
 
 ## What makes the perfect naming convention?
 
-Ideally the perfect naming convention for sizes should:
+Ideally the perfect naming convention for sizes should:-
 
-- Be semantic in that it implies a clear incrementation from small to large - otherwise it’s impossible to identify which size represents what without having to check the source code.
-- Be easy to remember - otherwise again I’m having to refer back to the source code.
-- Scale - this one is the important one as it needs to be able to adapt to change as your stylesheet grows in size.
+- Be semantic, in that it uses names representing a clear incrementation from small to large - otherwise it’s impossible to identify which class represents what, without having to check the stylesheet.
+- Be easy to remember - otherwise again, I'll need to refer back to the stylesheet.
+- Scale - this one is the important one as it needs to be able to adapt to change as my stylesheet grows in size.
 
-Here I have a media object with three modifiers using the same simple naming convention as before - small, medium and large. Let’s apply these principles and see how it fairs.
+Below is a media object with three modifiers using the same simple naming convention as before - small, medium and large. I'll apply the three principles and see what happens.
 
 ```css
 .o-media {
@@ -70,9 +70,11 @@ Here I have a media object with three modifiers using the same simple naming con
 }
 ```
 
-It’s definitely semantic in that it implies incrementation. If I see `.o-media--spacing-large` attached to one element and then I see `.o-media--spacing-small` attached to another, I know for certain that the former is going to have more spacing than the latter. This naming convention is also simple enough to remember without having to refer back to the CSS. So far so good.
+It’s definitely semantic in that it implies incrementation. If I see `.o-media--spacing-large` attached to one element and then I see `.o-media--spacing-small` attached to another, I'll know for certain that the former is going to have more spacing than the latter. This naming convention is also simple enough to remember, without having to refer back to the stylesheet. So far so good.
 
-Say a year after the initial build is complete and I’m making amends. I require another variant with a `margin-right: 50px;`. I decide to call this `.o-media--extra-large` as it’s larger than my already largest modifier so needs to represent this semantically. The situation repeats itself a few more times as I require larger and larger abstractions and suddenly I have this:
+As mentioned above, scalability is the one of the most important aspects a naming convention needs. 
+
+Say a year after the initial build is complete, I’m making amends and I require another spacing modifier with `margin-right: 50px;`. I decide to call this `.o-media--spacing-extra-large` as it’s already larger than my largest modifier, so should reflect this semantically in its name. The situation repeats itself a few more times, as I require larger and larger abstractions, and suddenly I have this:-
 
 ```css
 .o-media--spacing-small > .o-media__image {
@@ -100,9 +102,9 @@ Say a year after the initial build is complete and I’m making amends. I requir
 }
 ```
 
-The problem here is that the medium baseline class `.o-media--medium` is now no longer a baseline and suddenly more than 50% of classes are tagged as large. Technically it’s ok as it’s still working, but in my opinion is a bit messy.
+The problem here is that the medium class `.o-media--spacing-medium` is now no longer techically medium as suddenly most of the modifiers are larger than it. It’s still ok in that it’s working, but in my opinion, is a bit messy.
 
-Another issue arises if something in the design changes which means for example a `25px` variant is now required. To preserve the structure of the modifiers, this needs to sit in between `.o-media--spacing-medium` and `.o-media--spacing-large`. Previously new variants have been added using an ‘extra’ suffix, however in this case ‘extra-medium’ doesn’t make any sense at all:
+Another issue arises if something in the design changes which means, for example, a `25px` modifier is now required. To preserve the structure of the modifiers, this needs to sit in between `.o-media--spacing-medium` and `.o-media--spacing-large`. Previously new modifiers have been added using an ‘extra’ prefix, however in this case ‘extra-medium’ doesn’t make any sense at all:-
 
 ```css
 .o-media--spacing-medium > .o-media__image {
@@ -118,20 +120,19 @@ Another issue arises if something in the design changes which means for example 
 }
 ```
 
-I guess I could replace `.o-media--large`’s value with 25px, `.o-media--extra-large`’s value with `.o-media--large`’s, and so on until it’s all consistent again. However I would then have to go through all the instances of each class in the HTML and update accordingly every time I add another variant, which can become quite a task as the project grows larger.
+I could replace `.o-media--spacing-large`’s value with `25px`, `.o-media--spacing-extra-large`’s value with `.o-media--spacing-large`’s, and so on until it’s all consistent again. However, I would then have to go through all the instances of each class in the HTML and update accordingly every time I add another modifier, which will become more and more time consuming as the project grows larger.
  
-So what may have seemed like a reasonable naming system for sizings when the project started suddenly begins to falter as things change. This is an example of why a naming convention needs to be able to scale.
+So what may have seemed like a reasonable naming system for sizings when the project started, suddenly begins to strain as things change.
 
-## Making names for sizes as scalable as css
+## Making the names for sizes as scalable as the CSS
 
-Coming back to the initial list of what makes the perfect naming convention, is it possible to having a naming convention which is semantic, easy to remember AND scalable? 
+Coming back to the initial list of what makes the perfect naming convention, is it possible to have a naming convention which is semantic, easy to remember AND scalable? 
 
-To be honest there’s no perfect solution that I’ve found which meets all these criteria, though here are three almost-solutions which may work for you depending on the situation.
-
+I'm yet to find a perfect solution! But here are three approaches I've found, and regularly use, which may work for you, depending on the situation:-
 
 ### 1) Sacrifice semantics for pure scalability
 
-In one project I was building a website based on PSD files and was using an incremental naming convention to declare type sizes (Think `c-type--small`, `c-type--medium` etc). As I got drip fed more and more PSD files, new type sizes were being introduced at an alarming rate which meant I often spent quite a bit of time renaming elements in both HTML and CSS.
+In one project, I was building a website based on PSD designs and was using an incremental naming convention to declare type modifiers (Think `c-type--small`, `c-type--medium` etc). As I got drip fed more and more designs, new type sizes were being introduced at an alarming rate, which meant I often spent quite a bit of time renaming all my modifiers in the CSS and then their references in the HTML.
 
 Eventually I decided enough was enough and sacrificed semantics for pure scalability with this solution based on the [phonetic alphabet](https://en.wikipedia.org/wiki/NATO_phonetic_alphabet):
 
@@ -159,9 +160,9 @@ Eventually I decided enough was enough and sacrificed semantics for pure scalabi
 }
 ```
 
-It’s by no measure a perfect solution as it’s not clear which class represents which font size without having to refer back to the CSS. But what I do get in return is a massive boost to scalability as I no longer have to spend time enforcing the incremental nature of the previous convention. If I need another class, I just simply pick the next available letter and I’m on my way. 
+It’s by no measure a perfect solution, because it’s not clear which class represents which font size without having to refer back to the stylesheet. But what I do get in return, is a massive boost to scalability as I no longer have to spend time enforcing the incremental nature of the previous convention. If I need another class, I just simply pick the next available letter and I’m on my way! 
 
-When you have many instances of a class sharing a naming convention, I feel scalability should take priority over semantics, as it takes less effort for a developer to refer to the CSS for size details than it does to restructure an entire set of classes every time a new one is added.
+When you have many instances of classes sharing a naming convention, I feel scalability should take priority over semantics. This is because it takes less effort for a developer to refer to the stylesheet for more information than it does to restructure an entire set of classes every time a new one is added.
 
 
 ### 2) Using numbers as suffixes instead of “extra” prefix
@@ -178,7 +179,7 @@ $breakpoints: (
 )
 ```
 
-How does this help? Well, it removes the problem of bloated names such as “xxxx-lg” and also works when applied to “medium” when previously “extra-medium” made no sense whatsoever.
+How does this help? Well, it removes the problem of bloated names, such as “extra-extra-extra-large”, and also works when applied to “medium” when previously, “extra-medium” made no sense whatsoever.
 
 This compatibility across small, medium and large names also means it fares a little better when scaled up:
 
@@ -196,12 +197,12 @@ $breakpoints: (
 )
 ```
 
-Though it’s still not perfect. For example, if I need to add a “medium-4”, in all likelihood it will clash with the first instance of “large”, so then I would have to move each “large” instance up a notch to make way for my new value. So again, the same old problem of having to restructure things. Bah!
+Though, it’s still not perfect. For example, if I need to add a `medium-4`, there may be a clash with the first instance of `large` due to the narrow variation in the pixel values. I would then have to move each `large` instance up a notch to make way for my new value. So again, the same old problem of having to restructure things.
 
 
 ### 3) Declare speculative sizes at the start of the project
 
-Finally, what I could do is essentially declare so many sizes upfront that chances are I’ll already cover all potential eventualities. AKA - the nuclear option: 
+Finally, what I could do is essentially declare so many sizes upfront that chances are I’ll have already covered all potential eventualities. I call this the nuclear option!
 
 ```scss
 $spacing: (
@@ -234,9 +235,9 @@ $spacing: (
 }
 ```
 
-This could sidestep the issue of having to restructure things if new values are introduced later down the line as chances are I may have already included it.
+This could sidestep the issue of having to restructure things if new values are introduced later down the line, as chances are I may have already included it.
 
-Though of course this is a bit heavy handed as it would generate a ton of CSS which may never get used. Though if you are using tools such as Gulp, Grunt or PostCSS this problem is solved by running everything through [UNCSS](https://github.com/giakki/uncss) - which removes unused CSS from your stylesheet.
+Though of course this is a bit heavy handed as it would generate a ton of CSS which may never get used. Though if using tools such as Gulp, Grunt or PostCSS, this problem is solved by running everything through [UNCSS](https://github.com/giakki/uncss) - which removes unused CSS from a stylesheet.
 
 ### Naming conventions glossary
 There’s so many different ways to approach naming conventions for sizes in scalable CSS. To finish off I’ve collected a bunch together (admittedly for the reasons discussed some are better than others) for you to use in your own projects. Enjoy!
