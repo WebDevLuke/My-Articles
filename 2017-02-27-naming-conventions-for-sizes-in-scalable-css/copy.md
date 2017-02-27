@@ -1,4 +1,10 @@
-# Naming Conventions for Sizes in Scalable CSS
+<!-- 
+Naming Conventions for Sizes in Scalable CSS
+Posted on 27th February 2017
+
+Originally posted at:
+https://speckyboy.com/naming-conventions-sizes-scalable-css/
+-->
 
 In this article, I’ll be exploring how naming conventions can be used to represent sizes in scalable CSS.
 
@@ -171,11 +177,11 @@ Below is a naming convention very similar to the pattern demonstrated at the sta
 
 ```scss
 $breakpoints: (
-	"small": "370px",
-	"medium": "768px",
-	"medium-2": "840px",
-	"large": "1024px",
-	"large-2": "1280px"
+	"small": 370px,
+	"medium": 768px,
+	"medium-2": 840px,
+	"large": 1024px,
+	"large-2": 1280px
 )
 ```
 
@@ -185,15 +191,15 @@ This compatibility across small, medium and large names also means it fares a li
 
 ```scss
 $breakpoints: (
-	"small": "370px",
-	"small-2": "425px",
-	"small-3": "500px",
-	"medium": "768px",
-	"medium-2": "840px",
-	"medium-3": "925px",
-	"large": "1024px",
-	"large-2": "1280px",
-	"large-3": "1440px"
+	"small": 370px,
+	"small-2": 425px,
+	"small-3": 500px,
+	"medium": 768px,
+	"medium-2": 840px,
+	"medium-3": 925px,
+	"large": 1024px,
+	"large-2": 1280px,
+	"large-3": 1440px
 )
 ```
 
@@ -278,18 +284,18 @@ $myVar: (
 #### Location
 ```scss
 $myVar: (
-	"room": "10px",
-	"house": “20px
-	"street": "30px",
-	"town": "40px",
-	"city": "50px",
-	"state": "50px",
-	"country": "50px",
-	"continent": "60px",
-	"planet": "70px",
-	"system": "80px",
-	"cluster": "90px",
-	"galaxy": "100px"
+	"room": 10px,
+	"house": 20px,
+	"street": 30px,
+	"town": 40px,
+	"city": 50px,
+	"state": 60px,
+	"country": 70px,
+	"continent": 80px,
+	"planet": 90px,
+	"system": 100px,
+	"cluster": 110px,
+	"galaxy": 120px
 )
 ```
 
@@ -297,18 +303,18 @@ $myVar: (
 You get 26 variants to choose from. After that, you could combine variants to form new ones. (alpha-bravo for example)
 ```scss
 $myVar: (
-	"alpha": "10px",
-	"bravo": “20px
-	"charlie": "30px",
-	"delta": "40px",
-	"echo": "50px",
-	"foxtrot": "50px",
-	"golf": "50px",
-	"hotel": "60px",
-	"india": "70px",
-	"juliett": "80px",
-	"kilo": "90px",
-	"lima": "100px,
+	"alpha": 10px,
+	"bravo": 20px,
+	"charlie": 30px,
+	"delta": 40px,
+	"echo": 50px,
+	"foxtrot": 60px,
+	"golf": 70px,
+	"hotel": 80px,
+	"india": 90px,
+	"juliett": 100px,
+	"kilo": 110px,
+	"lima": 120px
 	/* and so on up to 26... */
 )
 ```
@@ -316,43 +322,43 @@ $myVar: (
 #### Military Ranks
 ```scss
 $myVar: (
-	"recruit": "10px",
-	"private": “20px
-	"corporal": "30px",
-	"sergeant": "40px",
-	"captain": "50px",
-	"major": "50px",
-	"lieutenant": "50px",
-	"continent": "60px",
-	"colonel": "70px",
-	"general": "80px"
+	"recruit": 10px,
+	"private": 20px,
+	"corporal": 30px,
+	"sergeant": 40px,
+	"captain": 50px,
+	"major": 60px,
+	"lieutenant": 70px,
+	"continent": 80px,
+	"colonel": 90px,
+	"general": 100px
 )
 ```
 
 #### Planets 
 ```scss
 $myVar: (
-	"mercury": "10px",
-	"venus": “20px
-	"earth": "30px",
-	"mars": "40px",
-	"jupitor": "50px",
-	"saturn": "50px",
-	"uranus": "50px",
-	"neptune": "60px",
-	"pluto": "70px"
+	"mercury": 10px,
+	"venus": 20px,
+	"earth": 30px,
+	"mars": 40px,
+	"jupitor": 50px,
+	"saturn": 60px,
+	"uranus": 70px,
+	"neptune": 80px,
+	"pluto": 90px"
 )
 ```
 
 #### Size Abbreviations 
 ```scss
 $myVar: (
-	"xxs": "10px",
-	"xs": “20px
-	"s": "30px",
-	"m": "40px",
-	"l": "50px",
-	"xl": "60px",
-	"xxl": "70px"
+	"xxs": 10px,
+	"xs": 20px,
+	"s": 30px,
+	"m": 40px,
+	"l": 50px,
+	"xl": 60px,
+	"xxl": 70px
 )
 ```
