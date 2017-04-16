@@ -1,11 +1,11 @@
 <!-- 
-Managing state in front-end with reusable JavaScript functions
+Managing state in OOCSS with reusable JavaScript functions
 Posted on XXXXXX
 -->
 
 # Managing state in front-end with reusable JavaScript functions
 
-Determining the most efficient way of managing state is a common issue in HTML/CSS, but thankfully there are many methodologies out there which provide some good solutions. My preferred solution comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
+Determining the most efficient way of managing component state is a common issue in [OOCSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss/), but thankfully there are many methodologies out there which provide some good solutions. My preferred solution comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
 
 > A state is something that augments and overrides all other styles. For example, an accordion section may be in a collapsed or expanded state. A message may be in a success or error state.
 > 
