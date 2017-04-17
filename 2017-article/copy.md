@@ -3,7 +3,7 @@ Managing state in OOCSS with reusable JavaScript functions
 Posted on XXXXXX
 -->
 
-# Managing state in front-end with reusable JavaScript functions
+# Managing state in OOCSS with reusable JavaScript functions
 
 Determining the most efficient way of managing component state is a common issue in [OOCSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss/), but thankfully there are many methodologies out there which provide some good solutions. My preferred solution comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
 
@@ -11,7 +11,7 @@ Determining the most efficient way of managing component state is a common issue
 > 
 > States are generally applied to the same element as a layout rule or applied to the same element as a base module class.
 
-One of my most used stateful classes is `is-active`. I typically use this to apply styles to components to reflect user interactions such as a click. Taking the accordion example from the prior quote, `is-active` would be added to denote an expanded state and would apply all the relevant CSS to reflect this change. As seen in the example below:
+One of my most used stateful classes is `is-active`. I typically use this to apply styles to components to reflect user interactions such as a click. Taking the accordion example from the prior quote, `is-active` would be added to represent an expanded state and would apply all the relevant CSS to reflect this change. As seen in the example below:
 
 <iframe height='300' scrolling='no' title='Accordion Component w Stateful Class' src='//codepen.io/lukedidit/embed/mmJRQP/?height=300&theme-id=5799&default-tab=html,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/lukedidit/pen/mmJRQP/'>Accordion Component w Stateful Class</a> by Luke Harrison (<a href='http://codepen.io/lukedidit'>@lukedidit</a>) on <a href='http://codepen.io'>CodePen</a>.
 </iframe>
@@ -69,7 +69,7 @@ for(var i = 0; i < accordion.length; i++) {
 }
 ```
 
-Although the `makeActive` function is reusable, we still need to write code to grab our component and any of its inner elements, so there's certainly room for improvement.
+Although the `makeActive` function is reusable, we still need to write code to grab our component and any of its inner elements, so there's certainly lots of room for improvement.
 
 To make these improvements, we can leverage [HTML5 custom data attributes](http://html5doctor.com/html5-custom-data-attributes/):
 
@@ -183,16 +183,76 @@ Other possibilities for keywords could be:
 - `previousSibling` - Toggles `is-active` on the element preceding the trigger element
 
 ## Moving beyond is-active
-Our reusable function is now working nicely and is an efficient way of setting up `is-active` toggles on all kinds of components. However what if I need to set up a similar toggle for another stateful class? As it stands I would have to duplicate my function and change all references of `is-active` to my new stateful class. Not very efficient.
+Our reusable function is now working nicely and is an efficient way of setting up `is-active` toggles on all kinds of components. However what if we need to set up a similar toggle for another stateful class? As it stands we would have to duplicate the function and change all references of `is-active` to the new stateful class. Not very efficient.
 
-We should improve our reusuble function to accept any class. To do so we'll have to refactor our data-attributes:
+We should improve our reusuble function to accept any class, and to do so we'll have to refactor our data-attributes. Instead of attaching just the `data-active` attribute to our trigger element, let's now replace it with the following:
 
+- `data-class` - The class we wish to add
+- `data-class-element` - The element we wish to add the class to
 
+This requires a few minor tweaks to our javascript:
 
+```javascript
+// Grab all elements with data-class and data-class-element attributes
+var elems = document.querySelectorAll("[data-class][data-class-element]");
 
+// Loop through if any are found
+if(elems.length){
+  for(var i = 0; i < elems.length; i++){
+    // Add event listeners to each one
+    elems[i].addEventListener("click", function(e){
 
+      // Prevent default action of element
+      e.preventDefault();
 
+      // If data-class-element is set to parent
+      if(this.getAttribute('data-class-element') === "parent") {
+        // Grab parent element
+        var linkedElement = this.parentElement;
+      }
+      else {
+        // Otherwise grab linked element
+        var linkedElement = document.querySelector("." + this.getAttribute('data-class-element'));
+      }
+
+      // Toggle class on linked element if present
+      if(linkedElement) {
+        linkedElement.classList.toggle(this.getAttribute('data-class'));
+      }
+      
+    });    
+  }
+}
+```
+
+And would be called in the HTML like so:
+
+```html
+<button class="c-button" data-class="is-loading" data-class-element="js-form-area">Submit</button>
+```
+
+In the example below, clicking the `c-button` component toggles the `is-loading` class on the `js-form-area` component:
+
+<iframe height='300' scrolling='no' title='#4) Form Component w Improved reusable any class function' src='//codepen.io/lukedidit/embed/oWXowO/?height=300&theme-id=5799&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/lukedidit/pen/oWXowO/'>#4) Form Component w Improved reusable any class function</a> by Luke Harrison (<a href='http://codepen.io/lukedidit'>@lukedidit</a>) on <a href='http://codepen.io'>CodePen</a>.
+</iframe>
+
+## Handling multiple toggles
+
+So we have a reusuable function which toggles any class on any element. These click events can be set up without have to write any additional javascript through the use of custom data attributes. However there's still ways to make this reusable function even more useful.
+
+Coming back to our previous example of the login form component, what if when the `c-button` element is clicked, in addition to it toggling `is-loading` on `js-form-area` we also want to toggle `is-disabled` on all the input elements? At the moment this isn't possible as our custom attributes only accept a single value each.
+
+Let's modify our function, so instead of each custom data attribute only accepting a single value, it accepts a comma seperated list of values - with each item value in `data-class` linking with the value of a matching index in `data-class-element`. Like so:
+
+```html
+<button class="c-button" data-class="is-loading, is-disabled" data-class-element="js-form-area, js-input">Submit</button>
+```
+
+With this, the following would happen once `c-button` is clicked:
+
+Notes:
 
 	- Manages multiple classes
+		- Form example, add is-disabled to inputs
 	- Implement different behaviours (add, remove, toggle)
-	- General ideas for improvement (eg swipe), reference OrionJS
+	- General ideas for improvement (eg swipe, changing event to hover, mouseover etc), reference OrionJS,
