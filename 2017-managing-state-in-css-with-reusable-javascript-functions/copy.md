@@ -1,11 +1,11 @@
 <!-- 
-Managing state in OOCSS with reusable JavaScript functions
+Managing state in CSS with reusable JavaScript functions
 Posted on XXXXXX
 -->
 
-# Managing state in OOCSS with reusable JavaScript functions
+# Managing state in CSS with reusable JavaScript functions
 
-Determining the most efficient way of managing component state is a common issue in [OOCSS](https://www.smashingmagazine.com/2011/12/an-introduction-to-object-oriented-css-oocss/), but thankfully there are many methodologies out there which provide some good solutions. My preferred solution comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
+Determining the most efficient way of managing component state can be a challenging issue in CSS, but thankfully there are many methodologies out there which provide some good solutions. My preferred solution comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
 
 > A state is something that augments and overrides all other styles. For example, an accordion section may be in a collapsed or expanded state. A message may be in a success or error state.
 > 
@@ -38,7 +38,7 @@ Not very efficient and certainly not very DRY.
 
 A better approach would be instead to write a single function which performs the same task and can be reused over and over again. Let's do that.
 
-## Creating a simple reusuable function
+## Creating a simple reusable function
 
 Let's start off by building a simple function which accepts an element as a parameter and toggles `is-active`:
 
@@ -53,13 +53,12 @@ This works fine, but if we slot it into our accordion JavaScript there's a probl
 
 ```javascript
 var accordion = document.querySelectorAll(".c-accordion"),
-		accordionHeader,
-		makeActive = function(elem){
-			elem.classList.toggle("is-active");
-		}
+makeActive = function(elem){
+	elem.classList.toggle("is-active");
+}
 
 for(var i = 0; i < accordion.length; i++) {
-	accordionHeader = accordion[i].querySelector(".c-accordion__header");
+	var accordionHeader = accordion[i].querySelector(".c-accordion__header"),
 	accordionCurrent = accordion[i];
 	
 	accordionHeader.addEventListener("click", function(){
@@ -122,7 +121,7 @@ This has certainly improved things as we no longer have to write code to grab an
 
 ## Improving our reusable function
 
-Whilst the reusable function works, when scaled we have to take care to make sure trigger and target element classes don't conflict with one another. In the example below, clicking one accordian would trigger `is-active` on all of them. 
+Whilst the reusable function works, when scaled we have to take care to make sure trigger and target element classes don't conflict with one another. In the example below, clicking one accordion would trigger `is-active` on all of them. 
 
 ```html
 <div class="c-accordion js-accordion">
@@ -141,9 +140,9 @@ Whilst the reusable function works, when scaled we have to take care to make sur
 </div>
 ```
 
-Adding number suffixes to each `js-accordion` reference does solve the problem, but it's a hassle which we can do without. A good solution would be to instead implement  scoping to our reusable function which would enable us to encapulate our toggles so they only effect the elements we want.
+Adding number suffixes to each `js-accordion` reference does solve the problem, but it's a hassle which we can do without. A good solution would be to instead implement  scoping to our reusable function which would enable us to encapsulate our toggles so they only effect the elements we want.
 
-To implement scoping, we'll need to create a seperate custom attribute called `data-active-scope`. It's value should represent the element which the toggle should be encapculated within, which in this instance is the parent `js-accordion` element.
+To implement scoping, we'll need to create a separate custom attribute called `data-active-scope`. It's value should represent the parent element which the toggle should be encapsulated within, which in this instance is the parent `js-accordion` element.
 
 ```html
 <div class="c-accordion js-accordion">
@@ -159,10 +158,12 @@ To implement scoping, we'll need to create a seperate custom attribute called `d
 
 Using the above HTML, the following behaviour should happen:
 
-1. When you click the first accordion, because it has a scope set to `js-accordion`, only elements which match or are children of that instance should be modified.
+1. When you click the first accordion, because it has a scope set to `js-accordion`, only `data-active` elements which match or are children of this `js-accordion` instance will have `is-active` toggled.
 2. When you click the second accordion, which doesn't have a scope, `is-active` would be toggled on all instances of `js-accordion`.
 
-Here's the modified Javascript and a working example:
+Provided `data-active-scope` is correctly set, any class toggles within each `js-accordion` element should be encapsulated regardless of any conflicting classnames.
+
+Here's the modified Javascript and a working example showing accordions with and without a `data-active-scope` attribute:
 
 ```javascript
 // Grab all elements with data-active attribute
@@ -229,11 +230,11 @@ if(elems.length){
 ## Moving beyond is-active
 Our reusable function is now working nicely and is an efficient way of setting up `is-active` toggles on all kinds of components. However what if we need to set up a similar toggle for another stateful class? As it stands we would have to duplicate the function and change all references of `is-active` to the new stateful class. Not very efficient.
 
-We should improve our reusuble function to accept any class, and to do so we'll have to refactor our data-attributes. Instead of attaching the `data-active` attribute to our trigger element, let's replace it with the following:
+We should improve our reusable function to accept any class, and to do so we'll have to refactor our data-attributes. Instead of attaching the `data-active` attribute to our trigger element, let's replace it with the following:
 
 - `data-class` - The class we wish to add.
 - `data-class-element` - The element we wish to add the class to.
-- `data-class-scope` - The scope attributre performs the same function, but has been renamed for consistency.
+- `data-class-scope` - The scope attribute performs the same function, but has been renamed for consistency.
 
 This requires a few minor tweaks to our JavaScript:
 
@@ -309,11 +310,11 @@ In the example below, clicking the `c-button` component toggles the `is-loading`
 
 ## Handling multiple toggles
 
-So we have a reusuable function which toggles any class on any element. These click events can be set up without having to write any additional JavaScript through the use of custom data attributes. However there's still ways to make this reusable function even more useful.
+So we have a reusable function which toggles any class on any element. These click events can be set up without having to write any additional JavaScript through the use of custom data attributes. However there's still ways to make this reusable function even more useful.
 
 Coming back to our previous example of the login form component, what if when the `c-button` element is clicked, in addition to it toggling `is-loading` on `js-form-area` we also want to toggle `is-disabled` on all the input elements? At the moment this isn't possible as our custom attributes only accept a single value each.
 
-Let's modify our function, so instead of each custom data attribute only accepting a single value, it accepts a comma seperated list of values - with each item value in `data-class` linking with the value of a matching index in `data-class-element` and `data-class-scope`. Like so:
+Let's modify our function, so instead of each custom data attribute only accepting a single value, it accepts a comma separated list of values - with each item value in `data-class` linking with the value of a matching index in `data-class-element` and `data-class-scope`. Like so:
 
 ```html
 <button class="c-button" data-class="is-loading, is-disabled" data-class-element="js-form-area, js-input" data-class-scope="false, js-form-area">Submit</button>
@@ -406,15 +407,15 @@ And here's another working example:
 </iframe>
 
 ## Moving beyond toggle
-Our reusable function is quite useful now, but it makes a presumption that toggling classes is the desired behavour. What if when clicked you want the trigger to remove a class if it's present and do nothing otherwise? Currently that's not possible.
+Our reusable function is quite useful now, but it makes a presumption that toggling classes is the desired behaviour. What if when clicked you want the trigger to remove a class if it's present and do nothing otherwise? Currently that's not possible.
 
 To round the function off let's integrate a bit of extra logic to allow for this behaviour. We'll introduce an optional data-attribute called `data-class-behaviour` which accepts the following options:
 
-- `toggle` - Toggles `data-class` on `data-class-element`. This should also be the default behaviour which happens if `data-class-behaviour` isn't present.
+- `toggle` - Toggles `data-class` on `data-class-element`. This should also be the default behaviour which happens if `data-class-behaviour` isn't defined.
 - `add` - Adds `data-class` on `data-class-element` if it isn't already present. If it is, nothing happens.
 - `remove` - Removes `data-class` on `data-class-element` if it's already present. If it isn't, nothing happens.
 
-As with previous data attributes, this new optional attribute will be a comma-seperated list to allow for different behaviours for each action. Like so:
+As with previous data attributes, this new optional attribute will be a comma-separated list to allow for different behaviours for each action. Like so:
 
 ```html
 <button class="c-button" data-class="is-loading, is-disabled" data-class-element="js-form-area, js-input" data-class-behaviour="toggle, remove">Submit</button>
@@ -528,10 +529,12 @@ And finally, a working example:
 <iframe height='300' scrolling='no' title='#6) Form Component w Improved reusable + multiple any class + behaviours function' src='//codepen.io/lukedidit/embed/zwvdeY/?height=300&theme-id=5799&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/lukedidit/pen/zwvdeY/'>#6) Form Component w Improved reusable + multiple any class + behaviours function</a> by Luke Harrison (<a href='http://codepen.io/lukedidit'>@lukedidit</a>) on <a href='http://codepen.io'>CodePen</a>.
 </iframe>
 
-## Further improvements
-There's many ways in which this reusable function could be improved even further. Including but not limited to:
+## Wrapping up
+What we've created is a powerful function which can be reused over and over again without writing any extra code. It allows us to quickly assign add, remove or toggle logic for multiple stateful classes on click and lets us scope these changes to a desired area. Definitely a big time saver in those large projects!
+
+There's still many ways in which this reusable function can be improved even further. Including but not limited to:
 
 - Support for using different events other than click.
 - Swipe support for touch devices.
 
-In the meantime, if you have any ideas for your own improvements or have a completely different method of managing stateful classes altogether then be sure to let me know in the comments below.
+In the meantime, if you have any ideas for your own improvements or even a completely different method of managing stateful classes altogether, then be sure to let me know in the comments below.
