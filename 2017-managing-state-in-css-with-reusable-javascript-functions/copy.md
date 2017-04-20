@@ -35,7 +35,7 @@ Whilst valid JavaScript, this would have to be repeated again and again for any 
 
 Not very efficient and certainly not very DRY.
 
-A better approach would be instead to write a single function which performs the same task and can be reused over and over again with minimal effort. Let's do that.
+A better approach would be instead to write a single function which performs the same task and can be reused over and over again with different components. Let's do that.
 
 ## Creating a simple reusable function
 
@@ -528,12 +528,13 @@ And finally, a working example:
 <iframe height='300' scrolling='no' title='#6) Form Component w Improved reusable + multiple any class + behaviours function' src='//codepen.io/lukedidit/embed/zwvdeY/?height=300&theme-id=5799&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'>See the Pen <a href='https://codepen.io/lukedidit/pen/zwvdeY/'>#6) Form Component w Improved reusable + multiple any class + behaviours function</a> by Luke Harrison (<a href='http://codepen.io/lukedidit'>@lukedidit</a>) on <a href='http://codepen.io'>CodePen</a>.
 </iframe>
 
-## Wrapping up
+## Closing
 What we've created is a powerful function which can be reused over and over again without writing any extra code. It allows us to quickly assign add, remove or toggle logic for multiple stateful classes on click and lets us scope these changes to a desired area.
 
-There's still many ways in which this reusable function can be improved even further. Including but not limited to:
+There's still many ways in which this reusable function can be improved even further:
 
 - Support for using different events other than click.
 - Swipe support for touch devices.
+- Some form of simple validation which allows you to declare JavaScript variables which must be truthy before a class change goes ahead.
 
 In the meantime, if you have any ideas for your own improvements or even a completely different method of managing stateful classes altogether, then be sure to let me know in the comments below.
