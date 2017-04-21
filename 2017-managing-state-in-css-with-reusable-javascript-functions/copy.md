@@ -529,12 +529,13 @@ And finally, a working example:
 </iframe>
 
 ## Closing
-What we've created is a powerful function which can be reused over and over again without writing any extra code. It allows us to quickly assign add, remove or toggle logic for multiple stateful classes on click and lets us scope these changes to a desired area.
+What we've created is a simple but powerful function which can be reused over and over again without writing any extra code. It allows us to quickly assign add, remove or toggle logic for multiple stateful classes on click and lets us scope these changes to a desired area.
 
-There's still many ways in which this reusable function can be improved even further:
+There's still many ways in which this reusable function can be improved even further. Including but not limited to:
 
 - Support for using different events other than click.
 - Swipe support for touch devices.
 - Some form of simple validation which allows you to declare JavaScript variables which must be truthy before a class change goes ahead.
+- Refinements if when you want to use the same class on multiple elements, you don't have to enter it multiple times.
 
 In the meantime, if you have any ideas for your own improvements or even a completely different method of managing stateful classes altogether, then be sure to let me know in the comments below.
