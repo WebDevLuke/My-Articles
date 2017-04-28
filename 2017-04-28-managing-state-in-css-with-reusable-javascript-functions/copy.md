@@ -1,9 +1,10 @@
 <!-- 
-Managing state in CSS with reusable JavaScript functions
-Posted on XXXXXX
--->
+Managing State in CSS with Reusable JavaScript Functions
+Posted on 28th April 2017
 
-# Managing state in CSS with reusable JavaScript functions
+Originally posted at:
+https://css-tricks.com/managing-state-css-reusable-javascript-functions/
+-->
 
 Determining the most efficient way of managing state can be a challenging issue in CSS, but thankfully there are many OOCSS-based methodologies out there which provide some good solutions. My preferred comes from [SMACSS (Scalable and modular architecture for CSS)](https://smacss.com/) and involves stateful classes. To quote SMACSS's [own documentation](https://smacss.com/book/type-state), stateful classes are:
 
@@ -119,7 +120,7 @@ This has certainly improved things as we no longer have to write code to grab an
 
 ## Improving our reusable function
 
-Whilst the reusable function works, when scaled we have to take care to make sure trigger and target element classes don't conflict with one another. In the example below, clicking one accordion would trigger `is-active` on all of them. 
+This reusable function works, but when scaled, we have to take care to make sure trigger and target element classes don't conflict with one another. In the example below, clicking one accordion would trigger `is-active` on all of them. 
 
 ```html
 <div class="c-accordion js-accordion">
@@ -140,7 +141,7 @@ Whilst the reusable function works, when scaled we have to take care to make sur
 
 Adding number suffixes to each `js-accordion` reference does solve the problem, but it's a hassle which we can do without. A good solution would be to instead implement  scoping to our reusable function which would enable us to encapsulate our toggles so they only effect the elements we want.
 
-To implement scoping, we'll need to create a separate custom attribute called `data-active-scope`. It's value should represent the parent element which the toggle should be encapsulated within, which in this instance is the parent `js-accordion` element.
+To implement scoping, we'll need to create a separate custom attribute called `data-active-scope`. Its value should represent the parent element which the toggle should be encapsulated within, which in this instance is the parent `js-accordion` element.
 
 ```html
 <div class="c-accordion js-accordion">
@@ -307,7 +308,7 @@ In the example below, clicking the `c-button` component toggles the `is-loading`
 
 ## Handling multiple toggles
 
-So we have a reusable function which toggles any class on any element. These click events can be set up without having to write any additional JavaScript through the use of custom data attributes. However there's still ways to make this reusable function even more useful.
+So we have a reusable function which toggles any class on any element. These click events can be set up without having to write any additional JavaScript through the use of custom data attributes. However, there's still ways to make this reusable function even more useful.
 
 Coming back to our previous example of the login form component, what if when the `c-button` element is clicked, in addition to it toggling `is-loading` on `js-form-area`, we also want to toggle `is-disabled` on all instances of `c-input`? At the moment this isn't possible as our custom attributes only accept a single value each.
 
@@ -406,7 +407,7 @@ And here's another working example:
 </iframe>
 
 ## Moving beyond toggle
-Our reusable function is quite useful now, but it makes a presumption that toggling classes is the desired behaviour. What if when clicked we want the trigger to remove a class if it's present and do nothing otherwise? Currently that's not possible.
+Our reusable function is quite useful now, but it makes a presumption that toggling classes is the desired behaviour. What if when clicked we want the trigger to remove a class if it's present and do nothing otherwise? Currently, that's not possible.
 
 To round the function off let's integrate a bit of extra logic to allow for this behaviour. We'll introduce an optional data-attribute called `data-class-behaviour` which accepts the following options:
 
