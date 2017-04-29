@@ -1,8 +1,9 @@
 <!-- 
 Renaming 3rd party SASS mixins without overriding
+Posted on 29th April 2017
 -->
 
-Let's say in your project you regularly use your own simple custom mixin to make writing media queries easier. You use it like this:
+Let's say in your project you regularly use your own simple custom mixin to make writing media queries easier. Something like this:
 
 ```scss
 @include bp(mobile) {
@@ -110,7 +111,7 @@ This approach would stop any dependent projects from breaking, meaning our frame
 
 ## Other benefits
 
-We can also use wrapper mixins to create "shortcuts" to call another mixin with certain arguments already set. This is useful if you find yourself using the same media query configuration over and over again.
+We can also use wrapper mixins to create "shortcuts" to call another mixin with certain arguments already set. This is useful if you find yourself passing the same set of arguments to a mixin over and over again.
 
 By creating a shortcut wrapper mixin, you're not only sparing yourself from having to type the same snippet repeatedly, it's also much easier to edit as there's only one instance of the mixin call in the codebase.
 
