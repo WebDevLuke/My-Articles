@@ -2,6 +2,7 @@
 A collection of my written articles in markdown format so they aren't tied to any specific website or implementation.
 
 ## Articles List
+- Renaming 3rd party SASS mixins without overriding (29th April 2017)
 - Managing State in CSS with Reusable JavaScript Functions (28th April 2017)
 - Naming Conventions for Sizes in Scalable CSS (27th February 2017)
 - Component vs utility classes in scalable CSS (8th February 2017)
