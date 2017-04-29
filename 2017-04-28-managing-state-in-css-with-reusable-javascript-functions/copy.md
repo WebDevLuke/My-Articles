@@ -90,26 +90,22 @@ Let's take a look at the JavaScript:
 var elems = document.querySelectorAll("[data-active]");
 
 // Loop through if any are found
-if(elems.length){
-  for(var i = 0; i < elems.length; i++){
-    // Add event listeners to each one
-    elems[i].addEventListener("click", function(e){
+for(var i = 0; i < elems.length; i++){
+	// Add event listeners to each one
+	elems[i].addEventListener("click", function(e){
 
-      // Prevent default action of element
-      e.preventDefault();
+		// Prevent default action of element
+		e.preventDefault();
 
-      // Grab linked elements
-      var linkedElement = document.querySelectorAll("." + this.getAttribute("data-active"));
+		// Grab linked elements
+		var linkedElement = document.querySelectorAll("." + this.getAttribute("data-active"));
 
-      // Toggle linked element if present
-      if(linkedElement.length) {
-        for(var i = 0; i < linkedElement.length; i++) {
-          linkedElement[i].classList.toggle("is-active");
-        }
-      }
-      
-    });    
-  }
+		// Toggle linked element if present
+		for(var i = 0; i < linkedElement.length; i++) {
+			linkedElement[i].classList.toggle("is-active");
+		}
+		
+	});    
 }
 ```
 
@@ -181,44 +177,40 @@ closestParent = function(child, match) {
 }
 
 // Loop through if any are found
-if(elems.length){
-	for(var i = 0; i < elems.length; i++){
-		// Add event listeners to each one
-		elems[i].addEventListener("click", function(e){
+for(var i = 0; i < elems.length; i++){
+	// Add event listeners to each one
+	elems[i].addEventListener("click", function(e){
 
-			// Prevent default action of element
-			e.preventDefault();
+		// Prevent default action of element
+		e.preventDefault();
 
-			// Grab scope if defined
-			if(this.getAttribute("data-active-scope")) {
-				var scopeElement = closestParent(this, this.getAttribute("data-active-scope"));
-			}
+		// Grab scope if defined
+		if(this.getAttribute("data-active-scope")) {
+			var scopeElement = closestParent(this, this.getAttribute("data-active-scope"));
+		}
 
-			if(scopeElement) {
-				// Grab scoped linked element
-				var linkedElement = scopeElement.querySelectorAll("." + this.getAttribute("data-active"));
-				// Convert to array
-				linkedElement = Array.prototype.slice.call(linkedElement);
-				// Check if our scope matches our target element and add to array if true.
-				// This is to make sure everything works when data-active matches data-active-scope.
-				if(scopeElement.classList.contains(this.getAttribute("data-active"))) {
-					linkedElement.unshift(scopeElement);
-				}
+		if(scopeElement) {
+			// Grab scoped linked element
+			var linkedElement = scopeElement.querySelectorAll("." + this.getAttribute("data-active"));
+			// Convert to array
+			linkedElement = Array.prototype.slice.call(linkedElement);
+			// Check if our scope matches our target element and add to array if true.
+			// This is to make sure everything works when data-active matches data-active-scope.
+			if(scopeElement.classList.contains(this.getAttribute("data-active"))) {
+				linkedElement.unshift(scopeElement);
 			}
-			else {
-				// Grab linked element
-				var linkedElement = document.querySelectorAll("." + this.getAttribute("data-active"));
-			}
+		}
+		else {
+			// Grab linked element
+			var linkedElement = document.querySelectorAll("." + this.getAttribute("data-active"));
+		}
 
-			// Toggle linked element if present
-			if(linkedElement.length) {
-				for(var i = 0; i < linkedElement.length; i++) {
-					linkedElement[i].classList.toggle("is-active");
-				}
-			}
-			
-		});    
-	}
+		// Toggle linked element if present
+		for(var i = 0; i < linkedElement.length; i++) {
+			linkedElement[i].classList.toggle("is-active");
+		}
+		
+	});    
 }
 ```
 
@@ -242,56 +234,51 @@ var elems = document.querySelectorAll("[data-class][data-class-element]");
 
 // closestParent helper function
 closestParent = function(child, match) {
-    if (!child || child == document) {
-        return null;
-    }
-    if (child.classList.contains(match) || child.nodeName.toLowerCase() == match) {
-        return child;
-    }
-    else {
-        return closestParent(child.parentNode, match);
-    }
+	if (!child || child == document) {
+			return null;
+	}
+	if (child.classList.contains(match) || child.nodeName.toLowerCase() == match) {
+			return child;
+	}
+	else {
+			return closestParent(child.parentNode, match);
+	}
 }
 
 // Loop through if any are found
-if(elems.length){
-    for(var i = 0; i < elems.length; i++){
-        // Add event listeners to each one
-        elems[i].addEventListener("click", function(e){
+for(var i = 0; i < elems.length; i++){
+	// Add event listeners to each one
+	elems[i].addEventListener("click", function(e){
 
-            // Prevent default action of element
-            e.preventDefault();
+		// Prevent default action of element
+		e.preventDefault();
 
-            // Grab scope if defined
-            if(this.getAttribute("data-class-scope")) {
-                var scopeElement = closestParent(this, this.getAttribute("data-class-scope"));
-            }
+		// Grab scope if defined
+		if(this.getAttribute("data-class-scope")) {
+			var scopeElement = closestParent(this, this.getAttribute("data-class-scope"));
+		}
 
-            if(scopeElement) {
-                // Grab scoped linked element
-                var linkedElement = scopeElement.querySelectorAll("." + this.getAttribute("data-class-element"));
-                // Convert to array
-                linkedElement = Array.prototype.slice.call(linkedElement);
-                // Check if our scope matches our target element and add to array if true.
-                // This is to make sure everything works when data-active matches data-active-scope.
-                if(scopeElement.classList.contains(this.getAttribute("data-class-element"))) {
-                    linkedElement.unshift(scopeElement);
-                }
-            }
-            else {
-                // Grab linked element
-                var linkedElement = document.querySelectorAll("." + this.getAttribute("data-class-element"));
-            }
+		if(scopeElement) {
+			// Grab scoped linked element
+			var linkedElement = scopeElement.querySelectorAll("." + this.getAttribute("data-class-element"));
+			// Convert to array
+			linkedElement = Array.prototype.slice.call(linkedElement);
+			// Check if our scope matches our target element and add to array if true.
+			// This is to make sure everything works when data-active matches data-active-scope.
+			if(scopeElement.classList.contains(this.getAttribute("data-class-element"))) {
+					linkedElement.unshift(scopeElement);
+			}
+		}
+		else {
+			// Grab linked element
+			var linkedElement = document.querySelectorAll("." + this.getAttribute("data-class-element"));
+		}
 
-            // Toggle linked element if present
-            if(linkedElement.length) {
-                for(var i = 0; i < linkedElement.length; i++) {
-                    linkedElement[i].classList.toggle(this.getAttribute("data-class"));
-                }
-            }
+		for(var i = 0; i < linkedElement.length; i++) {
+			linkedElement[i].classList.toggle(this.getAttribute("data-class"));
+		}
 
-        });    
-    }
+	});    
 }
 ```
 
@@ -345,59 +332,57 @@ closestParent = function(child, match) {
 }
 
 // Loop through if any are found
-if(elems.length){
-	for(var i = 0; i < elems.length; i++){
-		// Add event listeners to each one
-		elems[i].addEventListener("click", function(e){
+for(var i = 0; i < elems.length; i++){
+	// Add event listeners to each one
+	elems[i].addEventListener("click", function(e){
 
-			// Prevent default action of element
-			e.preventDefault();
+		// Prevent default action of element
+		e.preventDefault();
 
-			// Grab classes list and convert to array
-			var dataClass = this.getAttribute('data-class');
-			dataClass = dataClass.split(", ");
+		// Grab classes list and convert to array
+		var dataClass = this.getAttribute('data-class');
+		dataClass = dataClass.split(", ");
 
-			// Grab linked elements list and convert to array
-			var dataClassElement = this.getAttribute('data-class-element');
-			dataClassElement = dataClassElement.split(", ");
+		// Grab linked elements list and convert to array
+		var dataClassElement = this.getAttribute('data-class-element');
+		dataClassElement = dataClassElement.split(", ");
 
-			// Grab data-scope list if present and convert to array
-			if(this.getAttribute("data-class-scope")) {
-				var dataClassScope = this.getAttribute("data-class-scope");
-				dataClassScope = dataClassScope.split(", ");
-			}
+		// Grab data-scope list if present and convert to array
+		if(this.getAttribute("data-class-scope")) {
+			var dataClassScope = this.getAttribute("data-class-scope");
+			dataClassScope = dataClassScope.split(", ");
+		}
 
-			// Loop through all our dataClassElement items
-			for(var b = 0; b < dataClassElement.length; b++) {
-				// Grab elem references, apply scope if found
-				if(dataClassScope && dataClassScope[b] !== "false") {
-					// Grab parent
-					var elemParent = closestParent(this, dataClassScope[b]),
+		// Loop through all our dataClassElement items
+		for(var b = 0; b < dataClassElement.length; b++) {
+			// Grab elem references, apply scope if found
+			if(dataClassScope && dataClassScope[b] !== "false") {
+				// Grab parent
+				var elemParent = closestParent(this, dataClassScope[b]),
 
-					// Grab all matching child elements of parent
-					elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+				// Grab all matching child elements of parent
+				elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
 
-					// Convert to array
-					elemRef = Array.prototype.slice.call(elemRef);
+				// Convert to array
+				elemRef = Array.prototype.slice.call(elemRef);
 
-					// Add parent if it matches the data-class-element and fits within scope
-					if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
-						elemRef.unshift(elemParent);
-					}
-				}
-				else {
-					var elemRef = document.querySelectorAll("." + dataClassElement[b]);
-				}
-				// Grab class we will add
-				var elemClass = dataClass[b];
-				// Do
-				for(var c = 0; c < elemRef.length; c++) {
-					elemRef[c].classList.toggle(elemClass);
+				// Add parent if it matches the data-class-element and fits within scope
+				if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
+					elemRef.unshift(elemParent);
 				}
 			}
+			else {
+				var elemRef = document.querySelectorAll("." + dataClassElement[b]);
+			}
+			// Grab class we will add
+			var elemClass = dataClass[b];
+			// Do
+			for(var c = 0; c < elemRef.length; c++) {
+				elemRef[c].classList.toggle(elemClass);
+			}
+		}
 
-		});    
-	}
+	});    
 }
 ```
 
@@ -446,81 +431,79 @@ closestParent = function(child, match) {
 }
 
 // Loop through if any are found
-if(elems.length){
-	for(var i = 0; i < elems.length; i++){
-		// Add event listeners to each one
-		elems[i].addEventListener("click", function(e){
+for(var i = 0; i < elems.length; i++){
+	// Add event listeners to each one
+	elems[i].addEventListener("click", function(e){
 
-			// Prevent default action of element
-			e.preventDefault();
+		// Prevent default action of element
+		e.preventDefault();
 
-			// Grab classes list and convert to array
-			var dataClass = this.getAttribute('data-class');
-			dataClass = dataClass.split(", ");
+		// Grab classes list and convert to array
+		var dataClass = this.getAttribute('data-class');
+		dataClass = dataClass.split(", ");
 
-			// Grab linked elements list and convert to array
-			var dataClassElement = this.getAttribute('data-class-element');
-			dataClassElement = dataClassElement.split(", ");
+		// Grab linked elements list and convert to array
+		var dataClassElement = this.getAttribute('data-class-element');
+		dataClassElement = dataClassElement.split(", ");
 
-			// Grab data-class-behaviour list if present and convert to array
-			if(this.getAttribute("data-class-behaviour")) {
-				var dataClassBehaviour = this.getAttribute("data-class-behaviour");
-				dataClassBehaviour = dataClassBehaviour.split(", ");
+		// Grab data-class-behaviour list if present and convert to array
+		if(this.getAttribute("data-class-behaviour")) {
+			var dataClassBehaviour = this.getAttribute("data-class-behaviour");
+			dataClassBehaviour = dataClassBehaviour.split(", ");
+		}
+
+		// Grab data-scope list if present and convert to array
+		if(this.getAttribute("data-class-scope")) {
+			var dataClassScope = this.getAttribute("data-class-scope");
+			dataClassScope = dataClassScope.split(", ");
+		}
+
+		// Loop through all our dataClassElement items
+		for(var b = 0; b < dataClassElement.length; b++) {
+			// Grab elem references, apply scope if found
+			if(dataClassScope && dataClassScope[b] !== "false") {
+				// Grab parent
+				var elemParent = closestParent(this, dataClassScope[b]),
+
+				// Grab all matching child elements of parent
+				elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
+
+				// Convert to array
+				elemRef = Array.prototype.slice.call(elemRef);
+
+				// Add parent if it matches the data-class-element and fits within scope
+				if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
+					elemRef.unshift(elemParent);
+				}
 			}
-
-			// Grab data-scope list if present and convert to array
-			if(this.getAttribute("data-class-scope")) {
-				var dataClassScope = this.getAttribute("data-class-scope");
-				dataClassScope = dataClassScope.split(", ");
+			else {
+				var elemRef = document.querySelectorAll("." + dataClassElement[b]);
 			}
-
-			// Loop through all our dataClassElement items
-			for(var b = 0; b < dataClassElement.length; b++) {
-				// Grab elem references, apply scope if found
-				if(dataClassScope && dataClassScope[b] !== "false") {
-					// Grab parent
-					var elemParent = closestParent(this, dataClassScope[b]),
-
-					// Grab all matching child elements of parent
-					elemRef = elemParent.querySelectorAll("." + dataClassElement[b]);
-
-					// Convert to array
-					elemRef = Array.prototype.slice.call(elemRef);
-
-					// Add parent if it matches the data-class-element and fits within scope
-					if(dataClassScope[b] === dataClassElement[b] && elemParent.classList.contains(dataClassElement[b])) {
-						elemRef.unshift(elemParent);
+			// Grab class we will add
+			var elemClass = dataClass[b];
+			// Grab behaviour if any exists
+			if(dataClassBehaviour) {
+				var elemBehaviour = dataClassBehaviour[b];
+			}
+			// Do
+			for(var c = 0; c < elemRef.length; c++) {
+				if(elemBehaviour === "add") {
+					if(!elemRef[c].classList.contains(elemClass)) {
+						elemRef[c].classList.add(elemClass);
+					}
+				}
+				else if(elemBehaviour === "remove") {
+					if(elemRef[c].classList.contains(elemClass)) {
+						elemRef[c].classList.remove(elemClass);
 					}
 				}
 				else {
-					var elemRef = document.querySelectorAll("." + dataClassElement[b]);
-				}
-				// Grab class we will add
-				var elemClass = dataClass[b];
-				// Grab behaviour if any exists
-				if(dataClassBehaviour) {
-					var elemBehaviour = dataClassBehaviour[b];
-				}
-				// Do
-				for(var c = 0; c < elemRef.length; c++) {
-					if(elemBehaviour === "add") {
-						if(!elemRef[c].classList.contains(elemClass)) {
-							elemRef[c].classList.add(elemClass);
-						}
-					}
-					else if(elemBehaviour === "remove") {
-						if(elemRef[c].classList.contains(elemClass)) {
-							elemRef[c].classList.remove(elemClass);
-						}
-					}
-					else {
-						elemRef[c].classList.toggle(elemClass);
-					}
+					elemRef[c].classList.toggle(elemClass);
 				}
 			}
+		}
 
-		});    
-	}
+	});    
 }
 ```
 

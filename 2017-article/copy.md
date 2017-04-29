@@ -1,8 +1,6 @@
 <!-- 
-How to rename 3rd party SASS mixins without overriding
+Renaming 3rd party SASS mixins without overriding
 -->
-
-# How to rename 3rd party SASS mixins without overriding
 
 Let's say in your project you regularly use your own simple custom mixin to make writing media queries easier. You use it like this:
 
@@ -32,7 +30,7 @@ Instead of `bp` you're now using `mq`. In most cases this change of syntax would
 
 Or not.
 
-A problem may be that you simply disagree with the new syntax, preferring your original way of doing things because it's more semantic. Another could be if your project is something more than a standard website, such as a SASS framework, which is a dependency of other projects. In this instance making the change would break any of those dependent projects which use your original mixin. In the world of [semantic versioning](http://semver.org/) this would be an incompatible API change and so would require a major version bump.
+A problem may be that you simply disagree with the new syntax, preferring your original because it's more semantic. Another could be if your project is something more than a standard website, such as a SASS framework, which is a dependency of other projects. In this instance making the change would break any of those dependent projects which use your original mixin. In the world of [semantic versioning](http://semver.org/) this would be an incompatible API change and so would require a major version bump.
 
 Is their a way to get around these problems and retain our original syntax? Introducing...
 
@@ -112,9 +110,9 @@ This approach would stop any dependent projects from breaking, meaning our frame
 
 ## Other benefits
 
-We can also use this approach to create "shortcuts" to call a mixin with certain arguments already set. This is useful if you find yourself using the same media query configuration over and over again.
+We can also use wrapper mixins to create "shortcuts" to call another mixin with certain arguments already set. This is useful if you find yourself using the same media query configuration over and over again.
 
-By creating a shortcut wrapper mixin, you're not only sparing yourself from having to type the same snippet repeatedly, it's also much easier to edit as there's only one instance of the configuration in the codebase.
+By creating a shortcut wrapper mixin, you're not only sparing yourself from having to type the same snippet repeatedly, it's also much easier to edit as there's only one instance of the mixin call in the codebase.
 
 Let's see some examples:
 
@@ -206,8 +204,8 @@ This would compile to:
 
 ## Closing
 
-Using wrapper mixins are a simple way of renaming 3rd party mixins. There's nothing particulary complex about them, but when used correctly they can be useful.
+Using wrapper mixins are a simple way of renaming 3rd party mixins. There's nothing particularly complex about them, but they can be useful.
 
-In the first set of examples, we've used one to rename sass-mq's `mq` mixin into something more compatible. In the second set, we've also seen how wrapper mixins can be used to create helpful "shortcuts" to long winded mixin inputs. 
+In the first set of examples, we've used one to rename sass-mq's `mq` mixin into something more compatible. In the second set, we've also seen how wrapper mixins can be used to create helpful "shortcuts" for long winded mixin configurations. 
 
-Have any examples of your own, or spotted a way of improving on I've done? Let me know in the comments below.
+Have any examples of your own, or spotted a way of improving on what I've done? Let me know in the comments below.
