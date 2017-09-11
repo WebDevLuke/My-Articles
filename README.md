@@ -2,6 +2,8 @@
 A collection of my written articles in markdown format so they aren't tied to any specific website or implementation.
 
 ## Articles List
+- Web Designer Magazine - Generate a static blog with Gulp and Nunjucks (4th September 2017)
+- Web Designer Magazine - Website theming with CSS variables and Web Storage API (21st July 2017)
 - Managing State in CSS with Reusable JavaScript Functions - Part 2 (30th May 2017)
 - Renaming 3rd party SASS mixins without overriding (29th April 2017)
 - Managing State in CSS with Reusable JavaScript Functions (28th April 2017)

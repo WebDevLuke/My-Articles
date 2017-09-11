@@ -18,3 +18,5 @@ It's a beginner level tutorial perfect for any developer looking to learn more a
 > *In the UK, Web Designer Magazine is usually available in places like WHSmiths or any other half-decent newsagents. You can also [order it online](https://www.myfavouritemagazines.co.uk/web-designer-print-back-issues/web-designer-issue-264/).*
 
 Have any follow-up questions about the tutorial, or just want to clarify any of the steps? Feel free to post in the comments below or shoot me over an [email](http://www.lukeharrison.net/contact).
+
+**Update** - The full tutorial is now available to read on CreativeBloq. [Check it out](http://www.creativebloq.com/how-to/set-up-site-theming-with-css-variables).
